@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#SBATCH --job-name="run2"
+#SBATCH --output=2_%u.%x.%j.out
+
+#SBATCH -p compute
+#SBATCH -q normal
+#SBATCH -t 2-00:00:00
+
+#SBATCH -n 56
+#SBATCH -B 2:28:*
+
+
+#srun ./build/src/hybrid_1d/hybrid_1d --wd ./data -save -record_particle_at_init --outer_Nt 0 --load false 2>&1 | tee stdout.log
+srun ./build/src/hybrid_1d/hybrid_1d --wd ./data -save -record_particle_at_init --outer_Nt 5000 --load true 2>&1 | tee stdout.log
+

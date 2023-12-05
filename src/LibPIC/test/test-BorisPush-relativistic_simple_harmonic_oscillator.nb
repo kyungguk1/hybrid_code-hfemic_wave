@@ -1,0 +1,187 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5870,        179]
+NotebookOptionsPosition[      5245,        159]
+NotebookOutlinePosition[      5698,        177]
+CellTagsIndexPosition[      5655,        174]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Relativistic Simple Harmonic Oscillator", "Section",ExpressionUUID->"92582444-9e90-44d2-a98f-5d9be94c8ed5"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"\[PartialD]", "x"}], 
+     RowBox[{"\[PartialD]", "t"}]], "=", 
+    FractionBox["u", "\[Gamma]"]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "28a47bb2-3276-441f-bc3a-eaa182b19b62"],
+ ";\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"\[PartialD]", "u"}], 
+     RowBox[{"\[PartialD]", "t"}]], "=", 
+    RowBox[{
+     RowBox[{"-", 
+      SuperscriptBox["\[Omega]", "2"]}], "x"}]}], TraditionalForm]],
+  FormatType->TraditionalForm,ExpressionUUID->
+  "a84abad6-2607-4e73-b6f3-075af74d048e"],
+ "."
+}], "Text",ExpressionUUID->"e1375456-7993-4227-8f68-98e86336d222"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "relativistic", " ", "simple", " ", "harmonic", " ", "oscillator"}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\[Omega]", "=", 
+       RowBox[{"2.", "Pi"}]}], ",", 
+      RowBox[{"c", "=", ".5"}], ",", 
+      RowBox[{"nt", "=", "360"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"u", ",", "x", ",", "sol", ",", "ts"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"sol", "=", 
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"u", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{
+              RowBox[{"-", 
+               RowBox[{"\[Omega]", "^", "2"}]}], 
+              RowBox[{"x", "[", "t", "]"}]}]}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"x", "'"}], "[", "t", "]"}], "==", 
+             RowBox[{
+              RowBox[{"u", "[", "t", "]"}], "/", 
+              SqrtBox[
+               RowBox[{"1", "+", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"u", "[", "t", "]"}], "^", "2"}], "/", 
+                 RowBox[{"c", "^", "2"}]}]}]]}]}], ",", 
+            RowBox[{
+             RowBox[{"x", "[", "0", "]"}], "==", "0"}], ",", 
+            RowBox[{
+             RowBox[{"u", "[", "0", "]"}], "==", "1."}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"u", ",", "x"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", 
+            RowBox[{"2", 
+             RowBox[{"Pi", "/", "\[Omega]"}]}]}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ts", "=", 
+        RowBox[{
+         RowBox[{"Array", "[", 
+          RowBox[{"N", ",", 
+           RowBox[{"nt", "+", "1"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", 
+             RowBox[{"2", 
+              RowBox[{"Pi", "/", "\[Omega]"}]}]}], "}"}]}], "]"}], "//", 
+         "Rest"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"sol", "=", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"\[Omega]", " ", 
+            RowBox[{"x", "[", 
+             RowBox[{"ts", "-", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"ts", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], "-", 
+                 RowBox[{"ts", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "/", "2"}]}], 
+             "]"}]}], ",", 
+           RowBox[{"u", "[", "ts", "]"}]}], "}"}], "/.", 
+         RowBox[{"First", "[", "sol", "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"SetPrecision", "[", 
+         RowBox[{
+          RowBox[{"Map", "[", 
+           RowBox[{"Mean", ",", 
+            RowBox[{"sol", "^", "2"}]}], "]"}], ",", "20"}], "]"}], "//", 
+        "Print"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"ListPlot", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"Thread", "[", 
+            RowBox[{"{", 
+             RowBox[{"ts", ",", "#"}], "}"}], "]"}], "&"}], "/@", "sol"}], 
+         ",", 
+         RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+         RowBox[{"AxesLabel", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"\"\<t\>\"", ",", "None"}], "}"}]}], ",", 
+         RowBox[{"PlotLabels", "->", 
+          RowBox[{"{", 
+           RowBox[{"\"\<x\>\"", ",", "\"\<u\>\""}], "}"}]}], ",", 
+         RowBox[{"GridLines", "\[Rule]", "All"}]}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",\
+
+ CellLabel->
+  "In[145]:=",ExpressionUUID->"69504886-75e9-4667-86a5-4f757b0eff9a"]
+}, Open  ]]
+},
+WindowSize->{1068, 840},
+WindowMargins->{{Automatic, 190}, {111, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+FrontEndVersion->"13.0 for Mac OS X x86 (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"eae2aa7a-9c73-446f-82de-5a993bcbe0f8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 113, 0, 67, "Section",ExpressionUUID->"92582444-9e90-44d2-a98f-5d9be94c8ed5"],
+Cell[696, 24, 697, 23, 71, "Text",ExpressionUUID->"e1375456-7993-4227-8f68-98e86336d222"],
+Cell[1396, 49, 3833, 107, 254, "Input",ExpressionUUID->"69504886-75e9-4667-86a5-4f757b0eff9a"]
+}, Open  ]]
+}
+]
+*)
+
